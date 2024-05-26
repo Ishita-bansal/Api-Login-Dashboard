@@ -15,3 +15,14 @@ export const postApi =async (url, data, isFormData = false) => {
         throw error;
       }
   };
+
+export const getApi = async(url)=>{
+  try {
+    const response = await axiosInstance.get(url);
+    console.log("response-=-=-=-=>",response.data);
+    
+  } catch (error) {
+    console.error("GET API Error:", error.response ? error.response.data : error.message);
+    throw error;
+  }
+}

@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { ErrorHandle } from "../../components";
 import { API_SERVER_URL, APIS    } from "../../Api/api.constant";
 import { postApi } from "../../Api/api.client";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import { Header } from "../../Components";
 const initilValues = {
   email: "",
@@ -16,7 +16,7 @@ const validationSchema = Yup.object().shape({
 //   password: Yup.string().min(3, "Invalid Format").required("Required*"),
 });
 const Login = () => {
-//    const navigate = useNavigate();
+   const navigate = useNavigate();
 
   const onSubmit = async (values) => {
      const loginUrl = API_SERVER_URL+APIS.LOGIN;
@@ -28,11 +28,10 @@ const Login = () => {
                       alert("Login Success");
                       //localStorage.setItem("loggedUser",result);
                       localStorage.setItem("loggedUser", JSON.stringify(result.payload.data));
-              }else{
+                        navigate("/dashboard");
+                    }else{
                 alert("Login Faild")
               }
-         
-    
       } catch (error) {
         console.log("error", error);
       }
@@ -49,12 +48,12 @@ const Login = () => {
   return (
     <>
       <div  style={{ height:"100vh", width:"100%", display:"flex", justifyContent:"center",alignItems:"center",backgroundColor:"#e75a7b17"}}>
-        <div class="row" style={{width:"60%",backgroundImage:"url('/images/login.jpg')" ,backgroundRepeat:"no-repeat",backgroundPosition:"left",backgroundSize:"contain", borderRadius:"30px"}}>
+        <div class="row" style={{width:"65%",backgroundImage:"url('/images/login.jpg')" ,backgroundRepeat:"no-repeat",backgroundPosition:"left",backgroundSize:"contain", borderRadius:"30px"}}>
           <div class="col-lg-6"  >
 
           </div>
-          <div class="col-lg-6" style={{backgroundColor:"white", borderTopLeftRadius:"50px"}}>
-            <div style={{ height: "70vh" ,padding:"40px"}}>
+          <div class="col-lg-6" style={{backgroundColor:"white", borderTopLeftRadius:"100px"}}>
+            <div style={{ height: "80vh" ,padding:"40px"}}>
                 <div style={{backgroundImage:"url('/images/logo.png')", width:"100%",height:"15%",backgroundRepeat:"no-repeat",backgroundPosition:"center",backgroundSize:"contain",marginBottom:"40px"}}>
                   
             </div>

@@ -1,0 +1,151 @@
+.side-nav-container{
+    background-color: #04103b;
+    width:400px;
+ 
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    position:relative;
+    transition: width 0.3s ease;
+    /* box-shadow: 0 0 10px #00000030; */
+}
+
+.side-nav-container::after{
+    background-color: #197bbd;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 65px;
+    z-index: 1;
+}
+
+.side-nav-container-NX{
+    width:65px;
+    background-color:#197bbd;
+    transition: width 0.3s ease;
+    z-index:5;
+}
+
+.side-nav-container-NX::after {
+    display: none;
+}
+
+.nav-upper , .nav-heading , .nav-menu , .menu-item{
+    display:grid;
+}
+
+.nav-heading{
+    gird-template-columns: 2fr , 1fr;
+}
+
+.hamburger{
+    position:absolute;
+    right: 0;
+    top:50px;
+    background: none;
+    border:none;
+    cursor:pointer;
+    margin:auto -35px;
+    background-color:#197bbd;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding:20px;
+    border-radius: 90px;
+    height:55px;
+    width:54px;
+    z-index:1;
+}
+
+.hamburger-in{
+    position:absolute;
+    right: 0;
+    top:50px;
+    background: none;
+    border:none;
+    cursor:pointer;
+    margin:auto -35px;
+    background-color:#04103b;
+    padding:20px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 90px;
+    height:55px;
+    width:54px;
+    z-index:1;
+}
+
+.nav-menu{
+    grid-template-rows: repeat(7, 1fr);
+    margin-top:50px; 
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+.menu-items{
+    height: 60px;
+    width: 330px;
+    font-size:25px; 
+    display:flex;
+    gap:53px;
+    justify-content: flex-start;
+    align-items: baseline;
+    z-index:8;
+}
+
+
+
+.nav-menu a {
+    text-decoration: none;
+    color:white;
+}
+
+
+
+.menu-items img{
+    width:39px;
+    height:30px;
+    background-color: #197bbd;
+    z-index:4;
+    padding-left:16px;
+}
+
+.menu-items .span{
+    align-items: center;
+    border-radius: 20px 0 0 20px;
+    display: inline-flex;
+    flex-grow: 1;
+    font-size: 20px;
+    height: 42px;
+    padding: 12px 15px 12px 60px;
+    transition: all .3s ease-in-out .1s;
+    white-space: nowrap;
+    padding-left: 30px;
+  
+}
+
+
+.menu-items:hover .span{
+       background-color: white;
+       color:#04103b;
+}
+
+.menu-items-in{
+    padding: 20px 10px 12px 5px;
+}
+
+.menu-items-in img{
+    width: 30px;
+    height: 30px;
+}
+
+
+.menu-items.active .span {
+    background-color: white;
+    color: #04103b;
+}
