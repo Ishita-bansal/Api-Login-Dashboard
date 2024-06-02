@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ErrorHandle } from "../../components";
-import { API_SERVER_URL, APIS    } from "../../Api/api.constant";
+import { API_SERVER_URL, APIS} from "../../Api/api.constant";
 import { postApi } from "../../Api/api.client";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, UseDispatch } from "react-redux";
+import { loggedDetails } from "../../redux/authSlice";
 // import { Header } from "../../Components";
 const initilValues = {
   email: "",
@@ -17,25 +19,26 @@ const validationSchema = Yup.object().shape({
 });
 const Login = () => {
    const navigate = useNavigate();
+   const dispatch = useDispatch();
 
   const onSubmit = async (values) => {
-     const loginUrl = API_SERVER_URL+APIS.LOGIN;
-      
+     const loginUrl = API_SERVER_URL+APIS.LOGIN; 
+     console.log("loginUrl-=--->",loginUrl);
       try {
-        const result = await postApi(loginUrl,values, false );
-        // console.log("result??????",result);
-           if(result.status == true && result.payload.data.token){
-                      alert("Login Success");
-                      //localStorage.setItem("loggedUser",result);
-                      localStorage.setItem("loggedUser", JSON.stringify(result.payload.data));
-                        navigate("/dashboard");
-                    }else{
-                alert("Login Faild")
-              }
+        const result = await postApi(loginUrl,values,false);
+        console.log("result??????",result?.payload?.data);
+           if(result?.status === true && result?.payload?.data?.token){
+                 dispatch(loggedDetails( {
+                     name : result?.payload?.data?.user?.name,
+                     email : result?.payload?.data?.user?.email,
+                     role: result?.payload?.data?.user?.role,
+                     userId:result?.payload?.data?.user?.userId,
+                     token: result?.payload?.data?.token
+                 } ));
+           }
       } catch (error) {
         console.log("error", error);
       }
-     
   };
 
   const formik = useFormik({

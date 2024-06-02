@@ -7,5 +7,5 @@ export const PERSIST_STORAGE = "persist:root";
 export const APIS = {
     LOGIN:"/login",
     STUDENT:"/dashboard/registration/student",
-    DASHBOARD:"/dashboard",
 }
+

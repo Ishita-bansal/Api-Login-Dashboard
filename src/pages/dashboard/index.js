@@ -1,24 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { APIS } from "../../Api/api.constant";
 import { API_SERVER_URL } from "../../Api/api.constant";
-import { getApi } from "../../Api/api.client";
+import { postApi } from "../../Api/api.client";
 import { useNavigate } from "react-router-dom";
 const items = [
    
   {
     text: "Total students registered", 
-    img: "./images/stu1.png" },
+    img: "./images/stu1.png", 
+    identifier:"totalStudents"
+  },
+    
   {
     text: "Total students registered today",
     img: "./images/stu2.png",
+    identifier:"studentsRegisteredToday"
   },
   {
     text: "Total students registered in this month",
     img: "./images/stu3.png",
+    identifier:"studentsRegisteredThisMonth"
   },
   {
     text: "Total students registered in this year",
     img: "./images/stu4.png",
+    identifier:"studentsRegisteredThisYear"
   },
 ];
 
@@ -41,22 +47,23 @@ const items2 = [
       },
 ]
 const Dashboard = () => {
-       const navigate = useNavigate();
-
-    useEffect(() => {
-        fetchData();
-      }, []);
-
-      const Url = API_SERVER_URL + APIS.STUDENT;
-      const fetchData = async () => {
-        try {
-          const result = await getApi(Url);
-          console.log("result",result);
-        } catch (error) {
-          console.log("error", error);
-        }
-      };
-
+  const [data ,setdata] = useState();
+  const getData = async() =>{
+    try{
+      const studenturl = API_SERVER_URL + APIS.STUDENT;
+         const result = await postApi(studenturl , null , false);
+         console.log("student url=====>",result?.payload?.data);
+         setdata(result?.payload?.data);
+    }
+    catch(error){
+        console.log("error====>",error);
+    }
+  }
+ 
+  useEffect(()=>{
+      getData();
+  },[])
+      
   return (
     <>
     <div class="row">
@@ -83,7 +90,7 @@ const Dashboard = () => {
               >
                 <img src={info.img} alt="img" />
                 <div>
-                  <h5>1</h5>
+                  <h5>{data?.[info?.identifier]}</h5>
                   <p>{info.text}</p>
                 </div>
               </div>

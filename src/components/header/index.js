@@ -1,21 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Avatar } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useDispatch} from "react-redux";
 const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
    const [userData , setUserData] = useState();
     const navigate = useNavigate();
-
-   useEffect(()=>{
-    const data = JSON.parse(localStorage.getItem("loggedUser"));
-    console.log("data",data);
-    setUserData(data);
-   },[])
-
+    const dispatch = useDispatch();
+ 
    const logout = () => {
      localStorage.clear();
-     setUserData();
-     navigate("/login");
+     dispatch(logout());
    }
   
   const toggleDropdown = () => {
@@ -66,7 +61,7 @@ const Header = () => {
               <a class="dropdown-item" href="#" >{userData?.user?.name}</a>
               <a class="dropdown-item" href="#">{userData?.user?.email}</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/login" onClick={logout}>
+              <a class="dropdown-item" href="/login" onClick={()=>logout()}>
                 Logout
               </a>
             </div>
